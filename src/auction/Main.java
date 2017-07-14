@@ -1,5 +1,5 @@
 package auction;
-import auction.Bidder;
+
 
 import java.util.Arrays;
 
@@ -17,8 +17,8 @@ public class Main {
         cash  = 200;
         quantity = 100;
 
-        p1 = 0.5f;
-        p2 = 0.5f;
+        p1 = 0.7f;
+        p2 = 0.4f;
 
         bidder1 = new Bidder();
         bidder1.init(quantity,cash, p1);
