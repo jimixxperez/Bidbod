@@ -15,14 +15,14 @@ interface BidActions {
 
 
 
-public class Bidder implements BidActions{
+public class BinaryBidder implements BidActions{
 
-    private int quantity, cash;
-    private float p;
-    private int bid0, bid1;
-    private int idx = 0;
-    private int[] bids;
-    private int quantity_won;
+    protected int quantity, cash;
+    protected float p;
+    protected int bid0, bid1;
+    protected int idx = 0;
+    protected int[] bids;
+    protected int quantity_won;
 
 
     public void init(int quantity, int cash) {
@@ -35,13 +35,13 @@ public class Bidder implements BidActions{
 
         for (int i=0; i < (int) quantity/2; i++) {
             if (i <= p * quantity/2) {
-                this.bids[i] = bid1;
+                this.bids[i] = this.bid1;
             } else {
-                this.bids[i] = bid0;
+                this.bids[i] = this.bid0;
             }
         }
         Random random = new Random();
-        IntStream.range(0,random.nextInt(15)).forEach(n -> Bidder.shuffleArray(bids));
+        IntStream.range(0,random.nextInt(15)).forEach(n -> BinaryBidder.shuffleArray(bids));
     }
 
     public void init(int quantity, int cash, float p) {
@@ -62,11 +62,16 @@ public class Bidder implements BidActions{
 
         Random random = new Random();
         System.out.println(random.nextInt(15));
-        IntStream.range(0,random.nextInt(15)).forEach(n -> Bidder.shuffleArray(bids));
+        IntStream.range(0,random.nextInt(15)).forEach(n -> BinaryBidder.shuffleArray(bids));
     }
 
     public int placeBid() {
-        int bid = this.bids[this.idx];
+        int bid;
+        if (this.cash - this.bids[this.idx] >= 0) {
+            bid = this.bids[this.idx];
+        } else {
+            bid = 0;
+        }
         this.idx += 1;
         this.cash -= bid;
         this.quantity -= 2;
@@ -101,7 +106,7 @@ public class Bidder implements BidActions{
     }
 
 
-    private static void shuffleArray(int[] array)
+    public static void shuffleArray(int[] array)
     {
         int index;
         Random random = new Random();
