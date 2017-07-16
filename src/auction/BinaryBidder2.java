@@ -6,10 +6,17 @@ import java.util.stream.IntStream;
 /**
  * Created by user on 14.07.17.
  */
-public class Bidder2 extends BinaryBidder {
+public class BinaryBidder2 extends BinaryBidder {
 
 
-    public void init(int quantity, int cash, float p, int bid0) {
+    public BinaryBidder2(float p, int bid0) {
+        this.p = p;
+        this.bid0 = bid0;
+    }
+
+
+    @Override
+    public void init(int quantity, int cash) {
         this.quantity = quantity;
         this.cash = cash;
         this.p = p;

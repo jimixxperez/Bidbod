@@ -23,11 +23,13 @@ public class Main {
         p3 = 0.5f;
 
 
-        Bidder2 bidder3 = new Bidder2();
-        bidder3.init(quantity,cash,p2,2);
+        BinaryBidder2 bidder3 = new BinaryBidder2(p2,2);
+        bidder3.init(quantity,cash);
 
-        Bidder2 bidder4 = new Bidder2();
-        bidder4.init(quantity,cash,p3,3);
+        BinaryBidder2 bidder4 = new BinaryBidder2(p3,3);
+        bidder4.init(quantity,cash);
+
+        BinaryBidder bidder = new BinaryBidder(0.5f);
 
         int idx = 1;
         while(quantity > 0) {
