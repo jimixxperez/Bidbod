@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
  * Created by user on 10.07.17.
  *
  */
+
+// Methods that needs to be implemented in the class
 interface BidActions {
     public void init(int quantity, int cash);
     public int placeBid();
@@ -14,24 +16,29 @@ interface BidActions {
 }
 
 
+ // BinaryBidder: A bidder that generates a distribution of two possible bid values:
+ // bid0 = 0 and bid1 whose value depends on the set probability p.
 public class BinaryBidder implements BidActions{
 
     protected int quantity, cash;
     protected float p;
     protected int bid0, bid1;
     protected int idx = 0;
-    protected int[] bids;
+    protected int[] bids; // Array containing all bid values for the entire game
     protected int quantity_won;
 
+    // Constructor with default parameters
     public BinaryBidder() {
         this.p = 0.6f;
     }
 
+    // Alternative constructor
     public BinaryBidder(float p) {
         this.p = p;
     }
 
-
+    // Initiate important state parameters and bids array,
+    // followed by a shuffle of the array
     public void init(int quantity, int cash) {
         this.quantity = quantity;
         this.cash = cash;
@@ -50,7 +57,7 @@ public class BinaryBidder implements BidActions{
         IntStream.range(0,random.nextInt(15)).forEach(n -> BinaryBidder.shuffleArray(bids));
     }
 
-
+    // Places bids for each turn
     public int placeBid() {
         int bid;
         if (this.cash - this.bids[this.idx] >= 0) {
@@ -64,10 +71,8 @@ public class BinaryBidder implements BidActions{
         return bid;
     }
 
-
+    // Update the number of won quantities on each turn
     public void bids(int own, int other){
-        /*System.out.print(own);
-        System.out.print(other);*/
         if (own > other) {
             this.quantity_won += 2;
         } else if (own == other){
@@ -91,7 +96,7 @@ public class BinaryBidder implements BidActions{
         return this.bids;
     }
 
-
+    // Fisher-Yates shuffle function
     public static void shuffleArray(int[] array)
     {
         int index;

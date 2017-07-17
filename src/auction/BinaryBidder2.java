@@ -6,9 +6,18 @@ import java.util.stream.IntStream;
 /**
  * Created by user on 14.07.17.
  */
+
+// BinaryBidder2: Extends the BinaryBidder class by allowing two different bid0 and bid1 values
+// Bid1 is calculated based on bid0 and p.
 public class BinaryBidder2 extends BinaryBidder {
 
+    // Constructor with default parameters
+    public BinaryBidder2() {
+        this.p = 0.6f;
+        this.bid0 = 1;
+    }
 
+    // Alternative constructor
     public BinaryBidder2(float p, int bid0) {
         this.p = p;
         this.bid0 = bid0;
